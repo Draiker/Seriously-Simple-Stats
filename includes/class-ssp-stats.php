@@ -770,14 +770,6 @@ class SSP_Stats {
 
 									$total_listens_array = array_fill_keys($three_month_integers, 0);
 
-									/*
-									$total_listens_array = array(
-										intval( current_time( 'm' ) ) => 0, 
-										intval( date( 'm', strtotime( current_time('Y-m-d').' -1 MONTH' ) ) ) => 0, 
-										intval( date( 'm', strtotime( current_time('Y-m-d').' -2 MONTH' ) ) ) => 0 
-									);
-									*/
-
 									$post = get_post( intval( $result->post_id ) );
 
 									if ( ! $post ) {
@@ -808,8 +800,6 @@ class SSP_Stats {
 
 							}
 
-
-
 							//24 because we're counting an array
 							$total_per_page = apply_filters( 'ssp_stats_three_months_per_page', 24 ); 
 					
@@ -818,9 +808,9 @@ class SSP_Stats {
 							$html .= "		<tr>" . "\n";
 							$html .= "			<td>".__('Publish Date', 'seriously-simple-stats')."</td>" . "\n";
 							$html .= "			<td>".__('Episode Name', 'seriously-simple-stats')."</td>" . "\n";
-							$html .= "			<td style='text-align: center;'>".current_time('F')."</a></td>" . "\n";			
-							$html .= "			<td style='text-align: center;'>".date('F', strtotime( current_time("Y-m-d")." -1 MONTH" ) )."</td>" . "\n";
-							$html .= "			<td style='text-align: center;'>".date('F', strtotime( current_time("Y-m-d")." -2 MONTH" ) )."</td>" . "\n";
+							$html .= "			<td style='text-align: center;'>" . date( 'F', mktime( 0, 0, 0, $three_month_integers[0], 10 ) ) . "</a></td>" . "\n";
+							$html .= "			<td style='text-align: center;'>" . date( 'F', mktime( 0, 0, 0, $three_month_integers[1], 10 ) ) . "</td>" . "\n";
+							$html .= "			<td style='text-align: center;'>" . date( 'F', mktime( 0, 0, 0, $three_month_integers[2], 10 ) ) . "</td>" . "\n";
 							$html .= "			<td style='text-align: center;' class='ssp_stats_3m_total'>".__('Lifetime', 'seriously-simple-stats')."</td>" . "\n";
 							$html .= "		</tr>" . "\n";
 							$html .= "	</thead>" . "\n";
@@ -956,8 +946,12 @@ class SSP_Stats {
 		echo $html;
 	}
 
+	/**
+	 * Define the previous three months integer values
+	 *
+	 * @return array
+	 */
 	private function get_three_months_integers() {
-		// Define the previous three months array keys
 		$months = array();
 
 		$months[] = intval( current_time( 'm' ) );
@@ -971,7 +965,6 @@ class SSP_Stats {
 		$date->modify( 'first day of last month' );
 		$months[] = intval( $date->format( 'm' ) );
 
-		ssp_debug($months);
 		return $months;
 
 	}
