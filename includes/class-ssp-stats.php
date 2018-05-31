@@ -762,16 +762,21 @@ class SSP_Stats {
 
 							$total_posts = count( $results );
 
+							$three_month_integers = $this->get_three_months_integers();
+
 							if( is_array( $results ) ){
 
 								foreach( $results as $result ){
 
-									// Define the previous three months array keys
+									$total_listens_array = array_fill_keys($three_month_integers, 0);
+
+									/*
 									$total_listens_array = array(
 										intval( current_time( 'm' ) ) => 0, 
 										intval( date( 'm', strtotime( current_time('Y-m-d').' -1 MONTH' ) ) ) => 0, 
 										intval( date( 'm', strtotime( current_time('Y-m-d').' -2 MONTH' ) ) ) => 0 
 									);
+									*/
 
 									$post = get_post( intval( $result->post_id ) );
 
@@ -802,7 +807,9 @@ class SSP_Stats {
 								}
 
 							}
-									
+
+
+
 							//24 because we're counting an array
 							$total_per_page = apply_filters( 'ssp_stats_three_months_per_page', 24 ); 
 					
@@ -947,6 +954,26 @@ class SSP_Stats {
 		$wpdb->flush();
 
 		echo $html;
+	}
+
+	private function get_three_months_integers() {
+		// Define the previous three months array keys
+		$months = array();
+
+		$months[] = intval( current_time( 'm' ) );
+
+		$current_date = current_time( 'Y-m-d' );
+		$date         = new DateTime( $current_date );
+		$date->modify( 'first day of last month' );
+
+		$months[] = intval( $date->format( 'm' ) );
+
+		$date->modify( 'first day of last month' );
+		$months[] = intval( $date->format( 'm' ) );
+
+		ssp_debug($months);
+		return $months;
+
 	}
 
 	private function daily_stat ( $number = '', $description = '' ) {
