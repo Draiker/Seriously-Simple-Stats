@@ -87,6 +87,10 @@ Yes. This plugin uses the [Crawler Detect](https://github.com/JayBizzle/Crawler-
 * [TWEAK] Improved logging of downloads by catching and eliminating Google Podcast and iTunes Music Store bots
 * [TWEAK] Smoothed display of the dashboard widget styles
 
+= 1.2.2 =
+* 2018-05-28
+* [FIX] Fixed a bug introduced in the 1.2.1 update
+
 = 1.2.1 =
 * 2018-05-25
 * [NEW] Included a stats table upgrade to anonymise IP addresses stored
