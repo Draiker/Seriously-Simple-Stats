@@ -2,4 +2,16 @@ bin
 .idea
 *.iml
 .gitignore
-vendor/
+
+composer.phar
+composer.lock
+.DS_Store
+
+/vendor/jaybizzle/crawler-detect/tests
+/vendor/jaybizzle/crawler-detect/.coveralls.yml
+/vendor/jaybizzle/crawler-detect/.gitattributes
+/vendor/jaybizzle/crawler-detect/.gitignore
+/vendor/jaybizzle/crawler-detect/.styleci.yml
+/vendor/jaybizzle/crawler-detect/.travis.yml
+/vendor/jaybizzle/crawler-detect/CONTRIBUTING.md
+/vendor/jaybizzle/crawler-detect/phpunit.xml
